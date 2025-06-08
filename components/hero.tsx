@@ -10,6 +10,9 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const fullText = 'Siber Güvenlik. İstihbarat. Güç.';
 
+  // Yeni: Koordinatlar için state
+  const [floatingCoords, setFloatingCoords] = useState<{x: number, y: number}[]>([]);
+
   useEffect(() => {
     if (currentIndex < fullText.length) {
       const timeout = setTimeout(() => {
@@ -19,6 +22,15 @@ const Hero = () => {
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, fullText]);
+
+  // Yeni: Sadece client-side'da koordinatları oluştur
+  useEffect(() => {
+    const coords = Array.from({ length: 20 }).map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+    }));
+    setFloatingCoords(coords);
+  }, []);
 
   const scrollToAbout = () => {
     const element = document.getElementById('about');
@@ -48,13 +60,13 @@ const Hero = () => {
 
       {/* Floating Code Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {floatingCoords.map((coord, i) => (
           <motion.div
             key={i}
             className="absolute text-primary/20 font-mono text-xs"
             initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight,
+              x: coord.x, 
+              y: coord.y,
               opacity: 0 
             }}
             animate={{ 
