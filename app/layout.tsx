@@ -22,9 +22,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  icons: {
-    icon: '/favicon.ico',
-  },
   openGraph: {
     title: '1986SEC - Siber Güvenlik. İstihbarat. Güç.',
     description: 'Profesyonel siber güvenlik hizmetleri: penetrasyon testleri, OSINT, red team operasyonları ve tehdit modellemesi.',
@@ -57,6 +54,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
