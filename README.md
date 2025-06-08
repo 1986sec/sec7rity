@@ -1,0 +1,1 @@
+# 1986sec Portfolio - Netlify Otomatik Deploy Testi 
